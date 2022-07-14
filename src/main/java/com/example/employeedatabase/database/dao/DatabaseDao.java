@@ -32,7 +32,8 @@ public class DatabaseDao {
 					+ " FROM works_with ww"
 					+ " LEFT JOIN employee emp on (emp.emp_id=ww.emp_id)"
 					+ " LEFT JOIN client cli on (cli.client_id=ww.client_id)"
-					+ " WHERE cli.client_name in :clients";
+					+ " WHERE cli.client_name in :clients"
+					+ " AND emp.sex='M'";
 			Query jpqlQuery = entityManager.createNativeQuery(query);
 			jpqlQuery.setParameter("clients", companyList);
 			result = jpqlQuery.getResultList();
