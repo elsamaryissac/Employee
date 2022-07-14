@@ -25,7 +25,7 @@ public class DatabaseDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public List<Object[]> getSalesData(List<String> companyList) throws Exception {
+	public List<Object[]> getSalesData(List<String> companyList, String sex) throws Exception {
 		List<Object[]> result = null;
 		try {
 			String query = "SELECT ww.total_sales,emp.first_name,emp.last_name,emp.sex,cli.client_name"
@@ -33,9 +33,10 @@ public class DatabaseDao {
 					+ " LEFT JOIN employee emp on (emp.emp_id=ww.emp_id)"
 					+ " LEFT JOIN client cli on (cli.client_id=ww.client_id)"
 					+ " WHERE cli.client_name in :clients"
-					+ " AND emp.sex='M'";
+			        + " AND emp.sex = :sex";
 			Query jpqlQuery = entityManager.createNativeQuery(query);
 			jpqlQuery.setParameter("clients", companyList);
+			jpqlQuery.setParameter("sex", sex);
 			result = jpqlQuery.getResultList();
 		} catch (Exception e) {
 			LOGGER.error("Issue occured while connecting with DB", e);

@@ -28,8 +28,9 @@ public class SalesServiceImpl implements SalesService{
 	}
 
 	@Override
-	public List<SalesData> getSalesData(List<String> companyList) throws Exception {
-		return DataTransformer.getSalesData(databaseDao.getSalesData(companyList));
+	public List<SalesData> getSalesData(List<String> companyList, String sex) throws Exception {
+		return DataTransformer.getSalesData(databaseDao.getSalesData(companyList, sex));
 	}
+
 
 }

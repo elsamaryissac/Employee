@@ -34,15 +34,15 @@ public class SalesController {
 	private SalesService salesService;
 	
 	@GetMapping("/getdata")
-	public ResponseEntity<?> getSales(@RequestParam(required = true) List<String> values){
-		LOGGER.info("Get all sales records {}", values);
+	public ResponseEntity<?> getSales(@RequestParam(required = true) List<String> values , @RequestParam(required = true) String sex){
+		LOGGER.info("Get all sales records {} {}", values, sex);
 		SalesDataResponse response = new SalesDataResponse();
 		HttpStatus status = HttpStatus.OK;
 		try {
-			if (values.isEmpty()) {
-				setInvalidClientList(response);
+			if (values.isEmpty() || StringUtils.isEmpty(sex)) {
+				setInvalidRequest(response);
 			} else {
-				List<SalesData> salesDataList = salesService.getSalesData(values);
+				List<SalesData> salesDataList = salesService.getSalesData(values, sex);
 				if (salesDataList.isEmpty()) {
 					setNoDataFound(response);
 				} else {

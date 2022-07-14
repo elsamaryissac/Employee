@@ -4,8 +4,8 @@ import com.example.employeedatabase.response.GenericResponse;
 
 public class ErrorHandler {
 
-	public static void setInvalidClientList(GenericResponse response) {
-		setError(response, ErrorConstants.CLIENT_MISSING_CODE, ErrorConstants.CLIENT_MISSING_MESSGAE);
+	public static void setInvalidRequest(GenericResponse response) {
+		setError(response, ErrorConstants.MISSING_CODE, ErrorConstants.MISSING_MESSGAE);
 	}
 	
 	public static void setNoDataFound(GenericResponse response) {
